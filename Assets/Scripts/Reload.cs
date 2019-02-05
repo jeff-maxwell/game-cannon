@@ -7,6 +7,7 @@ public class Reload : MonoBehaviour
     public float interFireTime = 5f;
     public GameObject cannonball;
     public GameObject smokePuff;
+    public HUDScript hud = new HUDScript();
 
     private float timeUntilFire;
 
@@ -51,6 +52,8 @@ public class Reload : MonoBehaviour
             // we get these from the values in the hierarchy
             smoke.transform.localPosition = new Vector3(7.3f, 0, 0);
             smoke.transform.rotation = transform.rotation;
+
+            hud.IncrementShots();
         }
         else
         {
