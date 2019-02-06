@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Reload : MonoBehaviour
 {
@@ -20,8 +21,11 @@ public class Reload : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timeUntilFire <= 0f && Input.GetMouseButtonDown(0))
+        if (!EventSystem.current.IsPointerOverGameObject() 
+            && timeUntilFire <= 0f 
+            && Input.GetMouseButtonDown(0))
         {
+
             // Reset the time until fire.
             timeUntilFire = interFireTime;
 
@@ -37,6 +41,8 @@ public class Reload : MonoBehaviour
             // Set the transform values of the cannonball;
             // we get these from the values in the hierarchy
             ball.transform.localPosition = new Vector3(5, 0.05f, 0);
+
+            ball.GetComponent<AudioSource>().enabled = hud.audioEnabled;
 
             // Create the smoke puff.
             GameObject smoke = Instantiate(smokePuff);
